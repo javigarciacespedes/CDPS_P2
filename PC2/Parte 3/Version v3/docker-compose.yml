@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  details:
+    container_name : g16-detailsv3
+    image: g16/detailsv3
+    expose:
+      - 9080
+
+  productpage:
+    container_name: g16-productpage
+    image: g16/product-page
+    ports:
+      - 9080:9080
+    links:
+      - details
+      - reviews
+    
+  reviews:
+    container_name: g16-reviews
+    image: g16/reviews
+    environment:
+      - ENABLE_RATINGS=true
+      - STAR_COLOR=red
+    links:
+      - ratings
+    expose:
+      - 9080
+
+  ratings:
+    container_name: g16-ratingsv3
+    image: g16/ratingsv3
+    expose:
+     - 9080
+

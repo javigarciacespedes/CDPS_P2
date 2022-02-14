@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  details:
+    container_name : g16-details
+    image: g16/details
+    expose:
+      - 9080
+
+  productpage:
+    container_name: g16-productpage
+    image: g16/product-page
+    links:
+      - details
+      - reviews
+    ports:
+      - 9080:9080
+
+  reviews:
+    container_name: g16-reviews
+    image: g16/reviews
+    expose:
+      - 9080
+
+  
